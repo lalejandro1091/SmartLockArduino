@@ -87,15 +87,17 @@ uint8_t readnumber(void) {
     char c;
     while(i<3){
       idd += keypad.waitForKey();
-      idd = idd * 10;
+      idd *= 10;
       i++;
     }
+    Serial.println(idd);
     c = idd;
     if (isdigit(c)) {
        num *= 10;
        num += c - '0';
        validnum = true;
     } else if (validnum) {
+      idd = 0;
       return num;
     }
   }
@@ -115,13 +117,13 @@ void loop()
       codera = Serial.readString();
     }
     if(blank){
-          for(i = 0; i < 6; i++){
-    coderas[i] = codera[i];
-    }
+      for(i = 0; i < 6; i++){
+        coderas[i] = codera[i];
+      }
     i = 0;
     //lcd.write("Recibiendo: ");
     while(i < 6){
-    code[i] = keypad.waitForKey();
+    code[i] = keypad.getKey();
     //lcd.write(code[i]);
     i++;
     }
@@ -148,7 +150,7 @@ void loop()
     i = 0;
     //lcd.write("Recibiendo: ");
     while(i < 6){
-    code[i] = keypad.waitForKey();
+    code[i] = keypad.getKey();
     //lcd.write(code[i]);
     i++;
     }
@@ -174,26 +176,6 @@ void loop()
     digitalWrite(led, LOW);
     code = "";
     cont = 0;
-  }else if(codera == "luce1e" || codera == "luce2e"){
-      char nsw = codera[4];
-    switch(nsw){
-      case '1':
-        digitalWrite(luz1, HIGH);
-        break;
-      case '2':
-        digitalWrite(luz2, HIGH);
-        break;
-    }
-  }else if(codera == "luce1a" || codera == "luce2a"){
-      char nsw = codera[4];
-      switch(nsw){
-      case 1:
-        digitalWrite(luz1, LOW);
-        break;
-      case 2:
-        digitalWrite(luz2, LOW);
-        break;
-    }
   }
   }
   blank = false;
