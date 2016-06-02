@@ -36,10 +36,10 @@ void loop()
   }else if(codera1 == "luce1a" || codera2 == "luce2a"){
       char nsw = codera[4];
       switch(nsw){
-      case 1:
+      case '1':
         digitalWrite(luz1, LOW);
         break;
-      case 2:
+      case '2':
         digitalWrite(luz2, LOW);
         break;
     }

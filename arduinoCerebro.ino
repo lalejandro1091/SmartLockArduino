@@ -28,12 +28,12 @@ char keys[ROWS][COLS] = {
 byte rowPins[ROWS] = {4, 5, 6, 7}; //connect to the row pinouts of the keypad
 byte colPins[COLS] = {8, 9, 10}; //connect to the column pinouts of the keypad
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
-char * code="meempute";
+char * code="memepute";
 char * coderas="meempute";
 int cont = 0;
 String codera = "";
 int i = 0;
-int led = 11;
+int led = 13;
 void setup()
 {
   Serial.begin(9600);
@@ -63,11 +63,11 @@ void loop()
     if(getFingerprintIDez() != -1){
       Serial.println("se abre la puerta");
       digitalWrite(led, HIGH);
-      delay(4000);
+      delay(100);
       digitalWrite(led, LOW);
-    }else if(Serial.available()>0){
+    }/*else if(Serial.available()>0){
     if(Serial.available()>0){
-      /*array de lectura por string*/
+      //array de lectura por string
       codera = Serial.readString();
     }
     for(i = 0; i < 6; i++){
@@ -76,7 +76,7 @@ void loop()
     i = 0;
     //lcd.write("Recibiendo: ");
     while(i < 6){
-    code[i] = keypad.waitForKey();
+    code[i] = keypad.getKey();
     //lcd.write(code[i]);
     i++;
     }
@@ -91,18 +91,18 @@ void loop()
     if (cont >= 5){
       //lcd.write("se abre la puerta");
       digitalWrite(led, HIGH);
-      delay(4000);
+      delay(100);
       //lcd.clear();
     }else{
       //lcd.write("no abre la puerta");
       //digitalWrite(led, LOW);
-      delay(4000);
+      delay(100);
       //lcd.clear();
     }
     digitalWrite(led, LOW);
-    code = "";
+    code = " ";
     cont = 0;
-}
+}*/
 }
 
 uint8_t getFingerprintID() {
